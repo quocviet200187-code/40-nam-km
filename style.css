@@ -1,0 +1,260 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  --cream: #fff7e5;
+  --cream-deep: #f4e8cd;
+  --gold: #c69a4b;
+  --gold-dark: #a77a2f;
+  --red: #c90000;
+  --red-dark: #a90000;
+  --ink: #54351f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background: #f2eadb;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.page {
+  width: 100%;
+  max-width: 356px;
+  margin: 0 auto;
+}
+
+.panel {
+  overflow: hidden;
+  margin: 0 0 12px;
+  background: var(--cream);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  box-shadow: 0 2px 7px rgb(76 48 15 / 8%);
+}
+
+/* Phần 1: thiệp dọc, sát tỷ lệ ảnh mẫu */
+.invitation {
+  padding: 7px;
+  text-align: center;
+  background: #17110b;
+  border-color: #b99045;
+}
+
+.invitation-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #d4ad61;
+  border-radius: 2px;
+  background: #fff4d7;
+}
+
+.invitation-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  object-fit: contain;
+}
+
+.invitation-image.image-missing {
+  min-height: 220px;
+  padding: 22px;
+  color: #7d260f;
+  background: #fff4d7;
+  font-size: 13px;
+}
+
+.image-hint {
+  display: none;
+  padding: 8px;
+  color: #713a17;
+  background: #fff4d7;
+  font: 12px/1.5 Arial, sans-serif;
+}
+
+.invitation-image.image-missing + .image-hint {
+  display: block;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 8px 19px;
+  border: 0;
+  border-radius: 24px;
+  font: bold 12px Arial, sans-serif;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #7d3c12;
+  outline-offset: 2px;
+}
+
+.button-primary {
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 2px 6px rgb(94 0 0 / 20%);
+}
+
+.button-primary:hover {
+  background: var(--red-dark);
+}
+
+.open-button {
+  margin: 8px 0 1px;
+  min-height: 27px;
+  padding: 6px 17px;
+  font-size: 10px;
+}
+
+/* Phần 2: biểu mẫu gần với ảnh mẫu */
+.registration {
+  padding: 10px 11px 9px;
+  border-top: 2px solid var(--gold);
+}
+
+.registration h1 {
+  margin: 0 0 5px;
+  color: #a50000;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.intro {
+  margin: 0 0 9px;
+  color: #4b3a2b;
+  text-align: center;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 3px;
+  color: #422d1d;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.field-label span {
+  color: #a50000;
+}
+
+input[type="text"],
+input[type="tel"] {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  margin: 0 0 7px;
+  padding: 4px 7px;
+  border: 1px solid #c7a36b;
+  border-radius: 4px;
+  background: #fff;
+  color: #3d2c1c;
+  font: 9px Arial, sans-serif;
+}
+
+input::placeholder {
+  color: #91877b;
+  opacity: 1;
+}
+
+.submit-button {
+  display: flex;
+  min-height: 25px;
+  margin: 8px auto 4px;
+  padding: 6px 17px;
+  font-size: 9px;
+}
+
+.submit-button:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
+.status {
+  min-height: 0;
+  margin: 5px 0;
+  text-align: center;
+  font: 10px/1.45 Arial, sans-serif;
+}
+
+.status:empty {
+  display: none;
+}
+
+.status.success {
+  color: #176b36;
+}
+
+.status.error {
+  color: #a00000;
+}
+
+.privacy-note {
+  margin: 7px 0 0;
+  color: #7a6a55;
+  font: 7px/1.5 Georgia, "Times New Roman", serif;
+}
+
+.honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap;
+}
+
+.hidden-frame {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+@media (min-width: 600px) {
+  body {
+    padding: 24px 12px;
+  }
+
+  .page {
+    max-width: 356px;
+  }
+}
+
+
+/* Trường ẩn chống bot: không hiển thị với khách tham dự. */
+.honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

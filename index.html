@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7e5">
+  <title>Thư mời kỷ niệm 40 năm thành lập trường THPT Lắk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <!-- PHẦN 1: ẢNH THIỆP MỜI -->
+    <section class="invitation panel" aria-label="Thiệp mời">
+      <div class="invitation-frame">
+        <img
+          class="invitation-image"
+          src="images/thiep-moi.png"
+          alt="Thiệp mời Lễ kỷ niệm 40 năm thành lập trường"
+          onerror="this.classList.add('image-missing'); this.alt='Chưa tìm thấy ảnh images/thiep-moi.png';">
+        <div class="image-hint" aria-live="polite">
+          Nếu ảnh chưa hiện, hãy thay file <strong>images/thiep-moi.png</strong> bằng ảnh thiệp của trường.
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 2: BIỂU MẪU XÁC NHẬN -->
+    <section class="registration panel" id="registration" aria-labelledby="formTitle">
+      <h1 id="formTitle">XÁC NHẬN THAM DỰ</h1>
+      <p class="intro">
+        Để chuẩn bị đón tiếp chu đáo, Quý đại biểu, quý thầy cô vui lòng đăng ký thông tin
+        tham dự Chương trình Lễ kỷ niệm 40 năm thành lập Trường THPT Lắk.
+      </p>
+
+      <form id="registrationForm"
+            action="https://script.google.com/macros/s/AKfycbxlHa4rUDkCcp8oyO9g2z5Gd_Xa1aaKlYAZjXA4jUvO8lF-bKST7W4vUAj_lvix-jUF/exec"
+            method="post"
+            target="submitFrame">
+        <label class="field-label" for="fullName">Họ và tên <span>*</span></label>
+        <input id="fullName" name="hoTen" type="text" maxlength="120"
+               autocomplete="name" placeholder="Nhập họ và tên" required>
+
+        <label class="field-label" for="phone">Số điện thoại <span>*</span></label>
+        <input id="phone" name="dienThoai" type="tel" maxlength="25"
+               autocomplete="tel" inputmode="tel"
+               placeholder="Số điện thoại liên hệ" required>
+
+        <!-- Honeypot chống bot đơn giản; người dùng không cần điền -->
+        <div class="honeypot" aria-hidden="true">
+          <label for="website">Không điền mục này</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button class="button button-primary submit-button" id="submitButton" type="submit">
+          Gửi đăng ký
+        </button>
+        <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="privacy-note">
+        Vui lòng kiểm tra thông tin trước khi gửi. Thông tin đăng ký được sử dụng để phục vụ
+        công tác tổ chức lễ kỷ niệm.
+      </p>
+    </section>
+  </main>
+
+  <iframe name="submitFrame" id="submitFrame" title="Phản hồi đăng ký" class="hidden-frame"></iframe>
+
+  <script>
+    (() => {
+      const form = document.getElementById("registrationForm");
+      const submitButton = document.getElementById("submitButton");
+      const status = document.getElementById("formStatus");
+      let pending = false;
+      let timeoutId = null;
+
+      form.addEventListener("submit", () => {
+        pending = true;
+        submitButton.disabled = true;
+        submitButton.textContent = "Đang gửi...";
+        status.className = "status";
+        status.textContent = "Đang gửi thông tin, vui lòng chờ...";
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(() => {
+          if (!pending) return;
+          pending = false;
+          submitButton.disabled = false;
+          submitButton.textContent = "Gửi đăng ký";
+          status.className = "status error";
+          status.textContent = "Chưa nhận được phản hồi. Hãy kiểm tra kết nối và thử lại; tránh gửi liên tiếp nhiều lần.";
+        }, 15000);
+      });
+
+      window.addEventListener("message", (event) => {
+        // Apps Script có thể phản hồi từ script.google.com hoặc miền googleusercontent.
+        // Chỉ chấp nhận đúng cấu trúc thông điệp của endpoint này.
+        let data = event.data;
+        try {
+          if (typeof data === "string") data = JSON.parse(data);
+        } catch (_) {
+          return;
+        }
+        if (!data || data.type !== "registration-result" || typeof data.ok !== "boolean") return;
+        if (!pending) return;
+
+        pending = false;
+        window.clearTimeout(timeoutId);
+        submitButton.disabled = false;
+        submitButton.textContent = "Gửi đăng ký";
+
+        if (data.ok) {
+          status.className = "status success";
+          status.textContent = "Đăng ký thành công! Xin cảm ơn Quý đại biểu, quý thầy cô đã đăng ký tham gia.";
+          form.reset();
+        } else {
+          status.className = "status error";
+          status.textContent = data.message || "Chưa gửi được thông tin. Vui lòng kiểm tra lại và thử lại.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
