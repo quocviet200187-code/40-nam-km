@@ -42,19 +42,22 @@ body {
 
 /* Phần 1: thiệp dọc, sát tỷ lệ ảnh mẫu */
 .invitation {
-  padding: 7px;
+  /* Bỏ khung nền tối/viền bao quanh ảnh thiệp */
+  padding: 0;
   text-align: center;
-  background: #17110b;
-  border-color: #b99045;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .invitation-frame {
   position: relative;
   width: 100%;
   overflow: hidden;
-  border: 1px solid #d4ad61;
-  border-radius: 2px;
-  background: #fff4d7;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .invitation-image {
@@ -123,6 +126,46 @@ input:focus-visible {
   min-height: 27px;
   padding: 6px 17px;
   font-size: 10px;
+}
+
+
+/* Nhóm hộp kiểm xác nhận tham dự */
+.attendance-group {
+  min-width: 0;
+  margin: 9px 0 8px;
+  padding: 0;
+  border: 0;
+}
+
+.attendance-group legend.field-label {
+  float: none;
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.attendance-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 0 0 8px;
+  color: #422d1d;
+  font: 10px/1.45 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+}
+
+.attendance-option input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: #a50000;
+  cursor: pointer;
+}
+
+.attendance-help {
+  margin: 0;
+  color: #7a6a55;
+  font: 8px/1.4 Arial, sans-serif;
 }
 
 /* Phần 2: biểu mẫu gần với ảnh mẫu */
