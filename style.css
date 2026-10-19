@@ -42,7 +42,6 @@ body {
 
 /* Phần 1: thiệp dọc, sát tỷ lệ ảnh mẫu */
 .invitation {
-  /* Bỏ khung nền tối/viền bao quanh ảnh thiệp */
   padding: 0;
   text-align: center;
   background: transparent;
@@ -55,9 +54,12 @@ body {
   position: relative;
   width: 100%;
   overflow: hidden;
+  padding: 0;
   border: 0;
+  outline: 0;
   border-radius: 0;
   background: transparent;
+  box-shadow: none;
 }
 
 .invitation-image {
@@ -128,46 +130,6 @@ input:focus-visible {
   font-size: 10px;
 }
 
-
-/* Nhóm hộp kiểm xác nhận tham dự */
-.attendance-group {
-  min-width: 0;
-  margin: 9px 0 8px;
-  padding: 0;
-  border: 0;
-}
-
-.attendance-group legend.field-label {
-  float: none;
-  width: 100%;
-  margin-bottom: 7px;
-}
-
-.attendance-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  margin: 0 0 8px;
-  color: #422d1d;
-  font: 10px/1.45 Georgia, "Times New Roman", serif;
-  cursor: pointer;
-}
-
-.attendance-option input[type="checkbox"] {
-  flex: 0 0 auto;
-  width: 15px;
-  height: 15px;
-  margin: 0;
-  accent-color: #a50000;
-  cursor: pointer;
-}
-
-.attendance-help {
-  margin: 0;
-  color: #7a6a55;
-  font: 8px/1.4 Arial, sans-serif;
-}
-
 /* Phần 2: biểu mẫu gần với ảnh mẫu */
 .registration {
   padding: 10px 11px 9px;
@@ -178,7 +140,7 @@ input:focus-visible {
   margin: 0 0 5px;
   color: #a50000;
   text-align: center;
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.2;
   font-weight: bold;
 }
@@ -187,7 +149,7 @@ input:focus-visible {
   margin: 0 0 9px;
   color: #4b3a2b;
   text-align: center;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.45;
 }
 
@@ -195,7 +157,7 @@ input:focus-visible {
   display: block;
   margin: 0 0 3px;
   color: #422d1d;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -215,7 +177,7 @@ input[type="tel"] {
   border-radius: 4px;
   background: #fff;
   color: #3d2c1c;
-  font: 9px Arial, sans-serif;
+  font: 12px Arial, sans-serif;
 }
 
 input::placeholder {
@@ -228,7 +190,7 @@ input::placeholder {
   min-height: 25px;
   margin: 8px auto 4px;
   padding: 6px 17px;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .submit-button:disabled {
@@ -240,7 +202,7 @@ input::placeholder {
   min-height: 0;
   margin: 5px 0;
   text-align: center;
-  font: 10px/1.45 Arial, sans-serif;
+  font: 13px/1.45 Arial, sans-serif;
 }
 
 .status:empty {
@@ -258,7 +220,7 @@ input::placeholder {
 .privacy-note {
   margin: 7px 0 0;
   color: #7a6a55;
-  font: 7px/1.5 Georgia, "Times New Roman", serif;
+  font: 10px/1.5 Georgia, "Times New Roman", serif;
 }
 
 .honeypot {
@@ -300,4 +262,42 @@ input::placeholder {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+
+/* Thu nhỏ phần lựa chọn xác nhận tham dự để nội dung mỗi phương án không bị xuống dòng */
+.registration fieldset {
+  min-width: 0;
+}
+
+.registration fieldset legend {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.registration fieldset label {
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.registration fieldset input[type="checkbox"],
+.registration fieldset input[type="radio"] {
+  vertical-align: middle;
+}
+
+
+/* Đảm bảo không còn viền đen hoặc bóng quanh bức thiệp */
+.invitation.panel,
+.invitation .invitation-frame,
+.invitation .invitation-image {
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.invitation.panel,
+.invitation .invitation-frame {
+  padding: 0 !important;
+  background: transparent !important;
 }
